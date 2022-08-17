@@ -1,5 +1,6 @@
 package me.hirotask.android.todoapp
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         //Viewを取得
         recyclerView = findViewById(R.id.rv)
         //アダプターに入れてRecyclerViewにセット
@@ -32,9 +32,16 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle("Todoを追加")
                 .setView(et)
-                .setPositiveButton("追加", null)
+                .setPositiveButton("追加", DialogInterface.OnClickListener {
+                    dialogInterface, i ->
+                    //addListに追加する
+                    val mytodo = et.text.toString()
+                    addList.add(TodoData(mytodo))
+                })
                 .setNegativeButton("キャンセル", null)
                 .show()
         }
     }
+
+
 }
