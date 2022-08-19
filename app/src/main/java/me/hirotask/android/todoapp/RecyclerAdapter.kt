@@ -25,9 +25,11 @@ class RecyclerAdapter(private val todoList : ArrayList<TodoData>) : RecyclerView
                     .setMessage("本当に削除しますか？")
                     .setPositiveButton("Yes", DialogInterface.OnClickListener {_, _ ->
                         todoList.removeAt(position)
+                        this@RecyclerAdapter.notifyItemRemoved(position)
                     })
                     .setNegativeButton("Cancel", null)
                     .show()
+
             }
         }
     }
