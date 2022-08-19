@@ -4,15 +4,16 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
-    private var addList = ArrayList<TodoData>()
+    private var todoList = ArrayList<TodoData>()
     private lateinit var recyclerView: RecyclerView
-    private var recyclerAdapter = RecyclerAdapter(addList)
+    private var recyclerAdapter = RecyclerAdapter(todoList)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity() {
                     dialogInterface, i ->
                     //addListに追加する
                     val mytodo = et.text.toString()
-                    addList.add(TodoData(mytodo))
+                    todoList.add(TodoData(mytodo))
+                    recyclerAdapter.notifyItemInserted(todoList.lastIndex)
                 })
                 .setNegativeButton("キャンセル", null)
                 .show()
